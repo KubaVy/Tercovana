@@ -10,12 +10,12 @@ namespace TerceApp
 {
     public class Terč
     {
-        private double velikost;
-        private Point umisteni;
-        private Canvas skupinaElips;
+        private double velikost; // Velikost terče
+        private Point umisteni; // Umístění terče
+        private Canvas skupinaElips; // Skupina prvků pro grafické zobrazení terče
 
-        public event EventHandler Zavre;
-        public event EventHandler Zasah;
+        public event EventHandler Zavre; // Událost, která se vyvolá při zavření terče
+        public event EventHandler Zasah; // Událost, která se vyvolá při zásahu terče
 
         public Terč(double velikost, Point umisteni)
         {
@@ -23,6 +23,7 @@ namespace TerceApp
             this.umisteni = umisteni;
             skupinaElips = new Canvas();
 
+            // Vytvoření jednotlivých elips terče
             var elips1 = CreateElips(velikost, Brushes.Red);
             skupinaElips.Children.Add(elips1);
 
@@ -38,6 +39,7 @@ namespace TerceApp
             Canvas.SetTop(elips3, posun);
             skupinaElips.Children.Add(elips3);
 
+            // Nastavení umístění terče na plátno
             Canvas.SetLeft(skupinaElips, umisteni.X);
             Canvas.SetTop(skupinaElips, umisteni.Y);
 
@@ -59,7 +61,7 @@ namespace TerceApp
         private void SkupinaElips_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             Kliknuto();
-            Zasah?.Invoke(this, EventArgs.Empty);
+            Zasah?.Invoke(this, EventArgs.Empty); // Vyvoláme událost Zasah
         }
 
         public UIElement GetGrafika()
@@ -76,7 +78,7 @@ namespace TerceApp
 
         public void Kliknuto()
         {
-            Zavre?.Invoke(this, EventArgs.Empty);
+            Zavre?.Invoke(this, EventArgs.Empty); // Vyvoláme událost Zavre
         }
 
         public void StartZaviraciCasovac()
